@@ -1,0 +1,25 @@
+name: Docker Image CD
+
+on:
+    release:
+        types: [published]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+            - name: Login to DockerHub Registry
+              run: echo ${{ secrets.DOCKER_ACCESS_KEY }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+            - name: Get the version
+              id: vars
+              run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
+            - name: Build the tagged Docker image
+              run: docker build . --file Dockerfile --tag khimick/pyth-test1:$
+            - name: Push the tagged Docker image
+              run: docker push khimick/pyth-test1:$
+            - name: Build the latest Docker image
+              run: docker build . --file Dockerfile --tag khimick/pyth-test1:latest
+            - name: Push the latest Docker image
+              run: docker push khimick/pyth-test1:latest
