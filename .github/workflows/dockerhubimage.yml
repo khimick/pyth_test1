@@ -15,10 +15,6 @@ jobs:
             - name: Get the version
               id: vars
               run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
-            - name: Build the tagged Docker image
-              run: docker build . --file Dockerfile --tag khimick/pyth-test1:$
-            - name: Push the tagged Docker image
-              run: docker push khimick/pyth-test1:$
             - name: Build the latest Docker image
               run: docker build . --file Dockerfile --tag khimick/pyth-test1:latest
             - name: Push the latest Docker image
