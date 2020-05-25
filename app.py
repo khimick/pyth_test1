@@ -12,3 +12,4 @@ logging.error('This is an error message')
 # Сообщение критическое
 logging.critical('FATAL!!!')
 print("sdfsdfsdfsdfsdfsdfsdf")
+print("sfsdfsjllj jfljg dljfg")
